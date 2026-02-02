@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARCHETYPE | About</title>
+    <style>
+       
+        body { 
+            background-color: #ffffff; 
+            color: #1a1a1a; 
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+       
+        .nav_bar { 
+            background-color: #cf0a2c; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 25px 5%;
+        }
+
+        .logo_text { 
+            font-size: 26px; 
+            font-weight: 900; 
+            color: #ffffff; 
+            text-decoration: none; 
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .menu_list { 
+            list-style: none; 
+            display: flex; 
+            gap: 35px; 
+            margin: 0; 
+            padding: 0; 
+        }
+
+        .menu_link { 
+            text-decoration: none; 
+            color: #ffffff; 
+            font-size: 14px; 
+            font-weight: 600; 
+            text-transform: uppercase; 
+            letter-spacing: 1.2px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .menu_link.active {
+            border-bottom: 2px solid #ffffff;
+        }
+
+       
+        .dark_hero {
+            background-color: #1a1a1a; /* Dark background from image */
+            color: #ffffff;
+            padding: 120px 5%;
+            text-align: left;
+        }
+
+        .dark_hero_container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .impact_statement {
+            font-family: 'Georgia', serif; /* Serif font to match image */
+            font-size: 48px;
+            line-height: 1.1;
+            font-weight: 400;
+            letter-spacing: -1px;
+            margin: 0;
+        }
+
+       
+
+        
+        .main_container { 
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%; 
+        }
+
+     
+        .section_title_container {
+            border-bottom: 1px solid #1a1a1a;
+            margin-top: 80px;
+            padding-bottom: 10px;
+        }
+        .section_title { font-size: 24px; font-weight: 400; margin: 0; text-transform: uppercase; letter-spacing: 1px; }
+
+     
+        .capabilities_grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px 40px;
+            margin-top: 40px;
+            margin-bottom: 100px;
+        }
+
+        .cap_item {
+            border-bottom: 1px solid #1a1a1a;
+            padding: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 18px;
+            font-weight: 400;
+            color: #1a1a1a;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .cap_item:hover {
+             color: #cf0a2c; 
+            }
+        .plus_icon {
+             font-size: 20px; 
+             color: #999;
+             }
+
+    </style>
+</head>
+<body>
+
+    <nav class="nav_bar">
+        <a href="index.html" class="logo_text">ARCHETYPE</a>
+        <ul class="menu_list">
+            <li><a href="index.html" class="menu_link">Work</a></li>
+            <li><a href="about.html" class="menu_link active">About</a></li>
+            <li><a href="team.html" class="menu_link">Team</a></li>
+            <li><a href="ideas.html" class="menu_link">Intelligence</a></li>
+            <li><a href="careers.html" class="menu_link">Careers</a></li>
+            <li><a href="contact.html" class="menu_link">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header class="dark_hero">
+        <div class="dark_hero_container">
+            <h1 class="impact_statement">
+                Archetype has been creating impact for brands through iconic, culture-changing, value-driving ideas since the company was founded. It builds on that rich legacy through Borderless Creativity — innovating at the intersections of its advertising, public relations, relationship design, consulting, and health capabilities with experts collaborating seamlessly across the globe.
+            </h1>
+        </div>
+    </header>
+
+    <div class="main_container">
+        
+        <div class="section_title_container">
+            <h2 class="section_title">Our Capabilities</h2>
+        </div>
+
+        <section class="capabilities_grid">
+            <div class="cap_item">Cultural Discovery <span class="plus_icon">+</span></div>
+            <div class="cap_item">Brand Strategy <span class="plus_icon">+</span></div>
+            <div class="cap_item">Brand Experience <span class="plus_icon">+</span></div>
+            
+            <div class="cap_item">Comms Strategy <span class="plus_icon">+</span></div>
+            <div class="cap_item">Impactful Advertising <span class="plus_icon">+</span></div>
+            <div class="cap_item">AdTech & Data <span class="plus_icon">+</span></div>
+            
+            <div class="cap_item">Dynamic Content & Context <span class="plus_icon">+</span></div>
+            <div class="cap_item">Digital Transformation <span class="plus_icon">+</span></div>
+            <div class="cap_item">Relationship Design <span class="plus_icon">+</span></div>
+        </section>
+
+    </div>
+
+</body>
+</html>

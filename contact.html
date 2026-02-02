@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARCHETYPE | Contact</title>
+    <style>
+       
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap');
+
+        :root {
+            --brand-red: #cf0a2c;
+            --brand-black: #111111;
+            --brand-grey: #666666;
+            --light-grey: #e5e5e5;
+            --bg-hover: #f9f9f9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            color: var(--brand-black);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 50px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            background-color: rgba(255, 255, 255, 0.98);
+            border-bottom: 1px solid var(--light-grey);
+        }
+
+        .logo-container {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .main-nav, .secondary-nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        .main-nav a, .secondary-nav a {
+            text-decoration: none;
+            color: var(--brand-black);
+            font-weight: 500;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+
+        .main-nav a:hover, .secondary-nav a:hover {
+            color: var(--brand-red);
+        }
+
+        .main-content {
+            margin-top: 130px;
+            padding: 50px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .line1 {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .line1 h1 {
+            flex: 1;
+            min-width: 300px;
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+        }
+
+        .separator-line {
+            display: flex;
+            gap: 50px; 
+            padding: 30px 0;
+        }
+
+        .separator-line hr {
+            flex: 1;
+            border: none;
+            border-top: 1px solid var(--light-grey);
+        }
+
+
+        .subline p {
+            flex: 1;
+            min-width: 300px;
+            font-size: 18px;
+            color: var(--brand-grey); /* Added Grey */
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+      
+        .regions-title {
+            padding-top: 100px;
+            padding-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 400;
+        }
+
+        .full-width-hr {
+            border: none;
+            border-top: 1px solid var(--brand-black); 
+            margin-bottom: 40px;
+        }
+
+        .continents {
+            padding: 0 0 60px 0;
+            font-size: 20px;
+            line-height: 1.6;
+            color: var(--brand-grey); 
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            text-align: center;
+        }
+
+
+        .city-grid-wrapper {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 40px 60px;
+        }
+
+        .city-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 20px;
+            border-bottom: 1px solid var(--light-grey);
+            padding: 15px 0;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+       
+        .city-item:hover {
+            border-bottom-color: var(--brand-red);
+            padding-left: 10px; /* Slight slide */
+            color: var(--brand-red);
+        }
+
+        .plus-icon {
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--light-grey);
+            transition: color 0.3s;
+        }
+
+        .city-item:hover .plus-icon {
+            color: var(--brand-red);
+        }
+
+        .footer-container {
+            padding: 50px;
+            border-top: 1px solid var(--light-grey);
+            margin-top: 80px;
+        }
+
+        .footer-details {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-nav a {
+            text-decoration: none;
+            color: var(--brand-grey); /* Grey Links */
+            font-size: 13px;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .footer-nav a:hover {
+            color: var(--brand-black);
+        }
+
+    
+    </style>
+</head>
+<body>
+    
+    <header class="main-header">
+        <nav class="main-nav">
+            <a href="index.html">Work</a>
+            <a href="about.html">About</a>
+            <a href="team.html">Team</a>
+            <a href="ideas.html">Intelligence</a>
+            <a href="careers.html">Careers</a>
+            <a href="contact.html" style="color: var(--brand-red);">Contact</a>
+        </nav>
+
+        <div class="logo-container">
+            <svg width="200" height="60" viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <style>
+                    /* Embedding font for SVG portability */
+                    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+                    .brand-text {
+                      font-family: 'Playfair Display', serif;
+                      font-weight: 700;
+                      letter-spacing: -1.5px;
+                    }
+                  </style>
+                </defs>
+                <text x="50%" y="65%" text-anchor="middle" fill="#cf0a2c" font-size="48" class="brand-text">
+                  Archetype
+                </text>
+              </svg>
+        </div>
+
+    </header>
+
+    <main class="main-content">
+        <div class="line1">
+            <h1>Contact us</h1>
+            <h1>Subscribe</h1>
+        </div>
+        
+        <div class="separator-line">
+            <hr>
+            <hr>
+        </div>
+        
+        <div class="line1 subline">
+            <p>Reach out for new business, media inquiries and other requests.</p>
+            <p>Stay up to date with our latest thinking and reports.</p>
+        </div>
+
+        <h1 class="regions-title">Regions</h1>
+        <hr class="full-width-hr">
+        
+        <div class="continents">
+            <p>Africa, Asia Pacific, Australia And Oceania, Caribbean, Europe,</p>
+            <p>Latin America, Middle East, North America</p>
+        </div>
+
+        <div class="city-grid-wrapper">
+            <div class="city-item"><span>Cambridge</span><span class="plus-icon">+</span></div>
+            <div class="city-item"><span>Chicago</span><span class="plus-icon">+</span></div>
+            <div class="city-item"><span>Denver</span><span class="plus-icon">+</span></div>
+            
+            <div class="city-item"><span>Los Angeles</span><span class="plus-icon">+</span></div>
+            <div class="city-item"><span>Miami</span><span class="plus-icon">+</span></div>
+            <div class="city-item"><span>Montreal</span><span class="plus-icon">+</span></div>
+            
+            <div class="city-item"><span>New York</span><span class="plus-icon">+</span></div>
+            <div class="city-item"><span>Parsippany</span><span class="plus-icon">+</span></div>
+            <div class="city-item"><span>Quebec</span><span class="plus-icon">+</span></div>
+            
+            <div class="city-item"><span>San Francisco</span><span class="plus-icon">+</span></div>
+            <div class="city-item"><span>Toronto</span><span class="plus-icon">+</span></div>
+            <div class="city-item"><span>Washington DC</span><span class="plus-icon">+</span></div>
+        </div>
+
+    </main>
+
+    <footer>
+        <section class="footer-container">
+            <div class="footer-details">
+                <nav class="footer-nav">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Cookies</a>
+                </nav>
+                <nav class="footer-nav">
+                    <a href="#">Subscribe</a>
+                    <a href="#">Connect</a>
+                    <a href="#">Location</a>
+                    <a href="#">Sitemap</a>
+                </nav>
+            </div>
+        </section>
+    </footer>
+</body>
+</html>

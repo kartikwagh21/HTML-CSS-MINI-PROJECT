@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARCHETYPE | Careers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-red: #cf0a2c;
+            --white: #ffffff;
+            --off-white: rgba(255, 255, 255, 0.95);
+        }
+        body {
+            background-color: var(--brand-red);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        .nav_bar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 60px;
+            box-sizing: border-box;
+            background: var(--brand-red);
+        }
+        .logo_text {
+            font-size: 24px;
+            font-weight: 900;
+            text-decoration: none;
+            color: var(--white);
+            letter-spacing: -1px;
+        }
+        .menu_list {
+            list-style: none;
+            display: flex;
+            gap: 40px;
+            margin: 0;
+        }
+        .menu_link {
+            text-decoration: none;
+            color: var(--white);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.8;
+        }
+        .menu_link:hover { 
+            opacity: 1;
+         }
+        .careers_wrapper {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 160px 20px;
+        }
+        .section_block {
+            display: flex;
+            gap: 80px;
+            margin-bottom: 160px;
+            align-items: center;
+        }
+        .reverse {
+            flex-direction: row-reverse;
+         }
+        .image_box {
+             flex: 1.2; 
+             overflow: hidden; 
+             border-radius: 4px; 
+            }
+        .text_box { 
+            flex: 0.8; 
+        }
+        .content_img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            display: block;
+        }
+        .image_box:hover .content_img {
+            transform: scale(1.05);
+        }
+        .hero_text {
+            font-size: clamp(100px, 18vw, 220px);
+            font-weight: 900;
+            text-align: center;
+            line-height: 0.8;
+            margin: 60px 0 120px 0;
+            letter-spacing: -8px;
+            opacity: 0.2;
+            -webkit-text-stroke: 2px white;
+            color: transparent;
+        }
+        .section_title {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 25px;
+            border-bottom: 2px solid white;
+            padding-bottom: 15px;
+            display: inline-block;
+            width: 100%;
+            text-transform: uppercase;
+        }
+        .body_copy {
+            font-size: 18px; 
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: var(--off-white);
+            font-weight: 400;
+        }
+
+        .quote_section {
+            padding: 120px 0;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .quote_text {
+            font-family: 'Playfair Display', serif;
+            font-size: 54px;
+            font-style: italic;
+            line-height: 1.1;
+            margin-bottom: 30px;
+        }
+
+        .quote_author {
+            font-size: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+       
+    </style>
+</head>
+<body>
+
+    <nav class="nav_bar">
+        <a href="#" class="logo_text">ARCHETYPE</a>
+        <ul class="menu_list">
+            <li><a href="index.html" class="menu_link">Work</a></li>
+            <li><a href="about.html" class="menu_link">About</a></li>
+            <li><a href="team.html" class="menu_link">Team</a></li>
+            <li><a href="ideas.html" class="menu_link">Intelligence</a></li>
+            <li><a href="careers.html" class="menu_link" style="opacity:1; border-bottom: 2px solid white;">Careers</a></li>
+            <li><a href="contact.html" class="menu_link">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="careers_wrapper">
+        
+        <h1 class="hero_text">CAREERS</h1>
+
+        <div class="section_block">
+            <div class="image_box">
+                <img src="https://images.pexels.com/photos/1595385/pexels-photo-1595385.jpeg?auto=compress&cs=tinysrgb&w=1200" class="content_img" alt="Creative Strategy">
+            </div>
+            <div class="text_box">
+                <h2 class="section_title">The New Standard</h2>
+                <p class="body_copy">Archetype was founded on a singular principle: to make brands matter in a world that is increasingly indifferent. We don't just place ads; we build cultural landmarks.</p>
+                <p class="body_copy">We hire the "misfits"—the thinkers who see the world differently. We give you the canvas, the tools, and the total freedom to disrupt the status quo.</p>
+            </div>
+        </div>
+
+        <div class="section_block reverse">
+            <div class="image_box">
+                <img src="https://images.pexels.com/photos/257904/pexels-photo-257904.jpeg?auto=compress&cs=tinysrgb&w=1200" class="content_img" alt="Production Power">
+            </div>
+            <div class="text_box">
+                <h2 class="section_title">Radical Inclusion</h2>
+                <p class="body_copy">Great ideas don't have a specific look, origin, or background. They come from the collision of different perspectives and lived experiences.</p>
+                <p class="body_copy">We are committed to building a workforce that mirrors the diversity of the global audience we speak to every single day.</p>
+            </div>
+        </div>
+
+        <div class="quote_section">
+            <p class="quote_text">"Advertising is only evil when it advertises evil things. But a great idea? That's the only currency that never devalues."</p>
+            <p class="quote_author">— Archetype Philosophy</p>
+        </div>
+
+        <div class="section_block">
+            <div class="image_box">
+                <img src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=1200" class="content_img" alt="Digital Innovation">
+            </div>
+            <div class="text_box">
+                <h2 class="section_title">Grow With Us</h2>
+                <p class="body_copy">Our mission is to inspire people and brands to make an impact. We believe the best way to do that is by fostering a community of inclusion.</p>
+                <p class="body_copy">Whether you are a data scientist, a copywriter, or a motion designer, your growth is our primary KPI. We invest in the person, not just the role.</p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,4 +1,5 @@
 # HTML-CSS-MINI-PROJECT
+<img width="2940" height="1670" alt="image" src="https://github.com/user-attachments/assets/336be721-7338-436c-a7e0-42cfd60b1e85" />
 
 
 # ARCHETYPE | Global Creative Agency Website Kit

@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>Archetype</title>
+    <style>
+        :root {
+            --brand-red: #cf0a2c;
+            --bg-color: #f9f9f9;
+            --ink-color: #111111;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .work {
+            display: grid;
+            grid-template-columns: 1fr;
+
+
+            grid-template-areas: "nav"
+                "main"
+                "footer";
+            min-height: 100vh;
+        }
+
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 50px 20px;
+            width: 100%;
+            position: fixed;
+            z-index: 100;
+            background-color: white;
+
+        }
+
+        .logo-container {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .main-nav,
+        .secondary-nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        .main-nav a,
+        .secondary-nav a {
+            text-decoration: none;
+            color: black;
+            font-weight: 500;
+        }
+
+        .white-blur {
+            position: fixed;
+            top: 110px;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+            z-index: 50;
+
+        }
+
+        .magnifying-glass {
+            grid-area: nav;
+            margin-top: 120px;
+            height: 50px;
+            padding: 0 50px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            color: grey;
+            font-size: 20px;
+        }
+
+        .main-content {
+
+            grid-area: main;
+            padding: 0 50px 50px 50px;
+
+        }
+
+        .image-gallery {
+            /* This creates the masonry effect */
+            column-count: 4;
+            column-gap: 20px;
+            padding: 20px 0;
+        }
+
+        .image {
+            position: relative;
+            overflow: hidden;
+            background: #000;
+            cursor: pointer;
+
+            /* Vital for Masonry: Prevents items from splitting across columns */
+            break-inside: avoid;
+            margin-bottom: 20px;
+            /* Space between items vertically */
+            border-radius: 4px;
+        }
+
+        .image img {
+            width: 100%;
+            height: auto;
+            /* Allows natural height */
+            display: block;
+            /* Removes bottom gap */
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            filter: grayscale(10%);
+        }
+
+        .image:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+
+        /* --- HOVER OVERLAY --- */
+        .hover-info {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(207, 10, 44, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            text-align: center;
+            padding: 30px;
+            color: white;
+        }
+
+        .image:hover .hover-info {
+            opacity: 1;
+        }
+
+        .hover-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            margin-bottom: 10px;
+            transform: translateY(20px);
+            transition: transform 0.4s ease 0.1s;
+        }
+
+        .hover-info p {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            line-height: 1.5;
+            font-weight: 300;
+            transform: translateY(20px);
+            transition: transform 0.4s ease 0.2s;
+        }
+
+        .image:hover .hover-info h3,
+        .image:hover .hover-info p {
+            transform: translateY(0);
+        }
+
+
+        .footer-container {
+            grid-area: footer;
+            height: 100px;
+        }
+
+        .footer-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 50px;
+        }
+
+
+
+        .footer-nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-nav a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .footer-nav a:hover {
+            color: grey;
+        }
+
+        @media (max-width: 768px) {
+            .main-header {
+                padding: 15px 20px;
+                flex-direction: column;
+                height: auto;
+            }
+
+            .logo-container {
+                position: relative;
+                left: 0;
+                top: 0;
+                transform: none;
+                margin: 10px 0;
+            }
+
+            .main-nav {
+                font-size: 12px;
+                gap: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .image.img_one,
+            .image.img_two {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .main-content {
+                padding: 0 10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-details {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+                padding: 20px;
+            }
+
+            .footer-nav {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bebas+Neue&family=Cinzel:wght@400;700&family=DM+Sans:ital,wght@0,700;1,700&family=Great+Vibes&family=Inter:wght@300;800;900&family=Lora:ital@1&family=Montserrat:wght@900&family=Playfair+Display:ital,wght@0,600;1,600&family=Righteous&family=Space+Grotesk:wght@700&family=Syne:wght@800&display=swap');
+
+
+
+
+
+
+        h1 {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            margin-bottom: 80px;
+            font-size: 24px;
+            letter-spacing: 1px;
+            opacity: 0.6;
+            text-transform: uppercase;
+        }
+
+
+        .logo__grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 60px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .logo__item {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            transition: transform 0.3s ease;
+        }
+
+        .logo__item:hover {
+            transform: scale(1.05);
+        }
+
+
+        svg {
+            width: 200px;
+            height: 80px;
+
+        }
+    </style>
+</head>
+
+<body class="work">
+    <header class="main-header">
+        <nav class="main-nav">
+            <a href="index.html" style="color: var(--brand-red);">Work</a>
+            <a href="about.html">About</a>
+            <a href="team.html">Team</a>
+            <a href="ideas.html">Intelligence</a>
+            <a href="careers.html">Careers</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+
+        <div class="logo-container">
+            <svg width="240" height="80" viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg">
+
+
+                <text x="50%" y="65%" text-anchor="middle" fill="#cf0a2c" font-size="48" class="brand-text">
+                    Archetype
+                </text>
+            </svg>
+
+        </div>
+
+        <nav class="secondary-nav">
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="white-blur"></div>
+
+    </header>
+
+
+    <div class="magnifying-glass">
+        <i class="fa-solid fa-magnifying-glass"></i>
+    </div>
+
+
+
+
+    <main class="main-content">
+
+        <h1>Our Work</h1>
+
+        <div class="logo__grid">
+
+            <div class="logo__item">
+                <svg viewBox="0 0 200 60">
+                    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+                        font-family="'Syne', sans-serif" font-weight="800" font-size="40" fill="#111">
+                        ELEVEN.
+                    </text>
+                </svg>
+            </div>
+
+            <div class="logo__item">
+                <svg viewBox="0 0 200 60">
+                    <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle"
+                        font-family="'Bebas Neue', sans-serif" font-size="50" fill="#111">
+                        pure oat?
+                    </text>
+                </svg>
+            </div>
+
+            <div class="logo__item">
+                <svg viewBox="0 0 200 60">
+                    <path d="M40 30 Q40 10 55 20 Q65 10 70 25 Q80 25 80 40 Q80 50 60 50 Q40 50 40 30" fill="#111" />
+                    <text x="90" y="42" font-family="'DM Sans', sans-serif" font-weight="700" font-size="32"
+                        fill="#111">
+                        jump
+                    </text>
+                </svg>
+            </div>
+
+            <div class="logo__item">
+                <svg viewBox="0 0 200 60">
+                    <rect x="20" y="10" width="40" height="40" rx="5" stroke="#111" stroke-width="8" fill="none" />
+                    <rect x="32" y="22" width="16" height="16" rx="2" fill="#111" />
+                    <text x="75" y="42" font-family="'Inter', sans-serif" font-weight="600" font-size="34"
+                        letter-spacing="-1" fill="#111">
+                        Boxed
+                    </text>
+                </svg>
+            </div>
+
+            <div class="logo__item">
+                <svg viewBox="0 0 200 60">
+                    <path d="M35 5 L60 20 L60 45 L35 60 L10 45 L10 20 Z" fill="#111" />
+                    <circle cx="35" cy="32" r="12" fill="#f7f5f0" />
+                    <rect x="28" y="28" width="14" height="8" fill="#111" />
+                    <text x="75" y="40" font-family="'Montserrat', sans-serif" font-weight="900" font-size="30"
+                        fill="#111">
+                        hive
+                    </text>
+                </svg>
+            </div>
+
+            <div class="logo__item">
+                <svg viewBox="0 0 200 80">
+                    <text x="50%" y="35%" dominant-baseline="middle" text-anchor="middle"
+                        font-family="'Inter', sans-serif" font-weight="800" font-size="28" fill="#111">
+                        Redwood
+                    </text>
+                    <text x="50%" y="70%" dominant-baseline="middle" text-anchor="middle"
+                        font-family="'Inter', sans-serif" font-weight="300" font-size="24" fill="#111">
+                        Cabins
+                    </text>
+                </svg>
+            </div>
+
+            <div class="logo__item">
+                <svg viewBox="0 0 200 60">
+                    <path d="M20 5 h160 l-20 50 h-160 Z" fill="#111" />
+                    <text x="90" y="42" text-anchor="middle" font-family="'Righteous', cursive" font-size="32"
+                        fill="#f7f5f0" letter-spacing="4">
+                        VELO
+                    </text>
+                </svg>
+            </div>
+
+            <div class="logo__item">
+                <svg viewBox="0 0 200 60">
+                    <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle"
+                        font-family="'Inter', sans-serif" font-weight="600" font-size="20" letter-spacing="6"
+                        fill="#111">
+                        HORIZON
+                    </text>
+                </svg>
+            </div>
+
+            <div class="logo__item">
+                <svg viewBox="0 0 200 60">
+                    <rect x="10" y="10" width="60" height="40" rx="10" fill="#111" />
+                    <polygon points="32,18 32,42 55,30" fill="#f7f5f0" />
+                    <text x="80" y="42" font-family="'Inter', sans-serif" font-weight="700" font-size="32"
+                        letter-spacing="-1" fill="#111">
+                        Stream
+                    </text>
+                </svg>
+            </div>
+
+            <div class="logo__item">
+                <svg viewBox="0 0 200 60">
+                    <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="'Cinzel', serif"
+                        font-weight="700" font-size="36" fill="#111">
+                        OAK&IRON
+                    </text>
+                    <line x1="20" y1="15" x2="180" y2="15" stroke="#111" stroke-width="2" />
+                </svg>
+            </div>
+
+            <div class="logo__item">
+                <svg viewBox="0 0 200 60">
+                    <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle"
+                        font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="48" fill="#111">
+                        so.co™
+                    </text>
+                </svg>
+            </div>
+
+            <div class="logo__item">
+                <svg viewBox="0 0 200 80">
+                    <text x="50%" y="40%" dominant-baseline="middle" text-anchor="middle"
+                        font-family="'Inter', sans-serif" font-weight="900" font-size="34" letter-spacing="-1"
+                        fill="#111">
+                        URBAN
+                    </text>
+                    <text x="50%" y="80%" dominant-baseline="middle" text-anchor="middle"
+                        font-family="'Inter', sans-serif" font-weight="900" font-size="34" letter-spacing="-1"
+                        fill="#111">
+                        CORE
+                    </text>
+                </svg>
+            </div>
+
+            <div class="logo__item">
+                <svg viewBox="0 0 200 60">
+                    <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle"
+                        font-family="'Playfair Display', serif" font-style="italic" font-size="42" fill="#111">
+                        lumina
+                    </text>
+                </svg>
+            </div>
+
+            <div class="logo__item">
+                <svg viewBox="0 0 200 60">
+                    <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle"
+                        font-family="'Great Vibes', cursive" font-size="54" fill="#111">
+                        Whimsy
+                    </text>
+                </svg>
+            </div>
+
+            <div class="logo__item">
+                <svg viewBox="0 0 200 60">
+                    <path d="M20 10 L40 10 L30 50 L10 50 Z" fill="#111" />
+                    <path d="M45 10 L55 10 L50 30 L40 30 Z" fill="#111" />
+                    <path d="M52 35 L62 35 L58 50 L48 50 Z" fill="#111" />
+
+                    <text x="75" y="42" font-family="'Montserrat', sans-serif" font-weight="900" font-style="italic"
+                        font-size="30" fill="#111">
+                        MACH
+                    </text>
+                </svg>
+            </div>
+
+            <div class="logo__item">
+                <svg viewBox="0 0 200 60">
+                    <circle cx="40" cy="30" r="15" fill="#111" />
+                    <circle cx="60" cy="30" r="15" fill="#111" opacity="0.7" />
+                    <circle cx="80" cy="30" r="15" fill="#111" opacity="0.4" />
+                    <text x="110" y="40" font-family="'Inter', sans-serif" font-weight="300" font-size="30" fill="#111">
+                        echo
+                    </text>
+                </svg>
+            </div>
+
+            <div class="logo__item">
+                <svg viewBox="0 0 200 60">
+                    <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="monospace"
+                        font-weight="bold" font-size="32" letter-spacing="-2" fill="#111">
+                        //root_
+                    </text>
+                </svg>
+            </div>
+
+            <div class="logo__item">
+                <svg viewBox="0 0 200 60">
+                    <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle"
+                        font-family="'Abril Fatface', cursive" font-size="38" letter-spacing="1" fill="#111">
+                        VELVET
+                    </text>
+                </svg>
+            </div>
+
+            <div class="logo__item">
+                <svg viewBox="0 0 200 60">
+                    <path d="M40 50 Q40 10 70 10 Q70 30 50 30 Q70 30 70 50" fill="none" stroke="#111" stroke-width="4"
+                        stroke-linecap="round" />
+                    <text x="80" y="42" font-family="'Lora', serif" font-weight="400" font-style="italic" font-size="34"
+                        fill="#111">
+                        bloom.
+                    </text>
+                </svg>
+            </div>
+
+            <div class="logo__item">
+                <svg viewBox="0 0 200 60">
+                    <rect x="20" y="10" width="20" height="40" fill="#111" />
+                    <rect x="45" y="10" width="20" height="40" fill="#111" />
+                    <rect x="70" y="10" width="20" height="40" fill="#111" />
+                    <text x="105" y="42" font-family="'Oswald', sans-serif" font-weight="900" font-size="36"
+                        letter-spacing="1" fill="#111">
+                        IRON
+                    </text>
+                </svg>
+            </div>
+
+        </div>
+
+
+        <section class="image-gallery">
+            <div class="image">
+                <img src="https://campaignsoftheworld.com/wp-content/uploads/2022/09/Yoox-The-Most-Exclusive-Collection.jpeg"
+                    alt="Yoox Campaign">
+                <div class="hover-info">
+                    <h3>YOOX Exclusive</h3>
+                    <p>Redefining luxury e-commerce with a campaign that speaks the language of desire.</p>
+                </div>
+            </div>
+
+            <div class="image">
+                <img src="https://smartyads.com/storage/uploads/2021/august/nike-brand-advertising.png"
+                    alt="Nike Branding">
+                <div class="hover-info">
+                    <h3>Nike Motion</h3>
+                    <p>Capturing the kinetic energy of sport through bold typography.</p>
+                </div>
+            </div>
+
+            <div class="image">
+                <img src="https://freemockupzone.com/wp-content/uploads/2018/09/Free-Brand-Advertising-Digital-AD-Mockup-PSD.jpg"
+                    alt="Digital Campaign">
+                <div class="hover-info">
+                    <h3>Digital Frontiers</h3>
+                    <p>A multi-platform experience designed to engage users across every touchpoint.</p>
+                </div>
+            </div>
+
+            <div class="image">
+                <img src="https://53.fs1.hubspotusercontent-na1.net/hubfs/53/best-ad-campaigns-7-20240904-129648.webp"
+                    alt="Creative Ad">
+                <div class="hover-info">
+                    <h3>HubSpot Growth</h3>
+                    <p>Turning complex data into compelling visual narratives.</p>
+                </div>
+            </div>
+
+            <div class="image">
+                <img src="https://cdn.create.vista.com/downloads/4e430eef-0d2a-4c99-85e8-7368227fbc77_1024.jpeg"
+                    alt="Design Layout">
+                <div class="hover-info">
+                    <h3>Vista Design</h3>
+                    <p>Empowering creators with tools that make professional design accessible.</p>
+                </div>
+            </div>
+
+            <div class="image">
+                <img src="https://mbluxury1.s3.amazonaws.com/2023/03/29161907/Luxury-Ads.jpg" alt="Luxury Campaign">
+                <div class="hover-info">
+                    <h3>Timeless Elegance</h3>
+                    <p>A heritage campaign bridging the gap between tradition and modernity.</p>
+                </div>
+            </div>
+
+            <div class="image">
+                <img src="https://www.818agency.com/wp-content/uploads/2015/11/net-a-porter-1.jpg" alt="Net-a-Porter">
+                <div class="hover-info">
+                    <h3>The Edit</h3>
+                    <p>Curating the season's essential looks for the world's premier fashion destination.</p>
+                </div>
+            </div>
+
+            <div class="image">
+                <img src="https://jingdaily.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Ff8lauh0h%2Fproduction%2Fa93122b2308f0e52229d31dd7837b48a0bfe608e-1600x1067.jpg%3Fq%3D90%26fit%3Dmax%26auto%3Dformat&w=3840&q=90"
+                    alt="Luxury Fashion">
+                <div class="hover-info">
+                    <h3>Eastern Lux</h3>
+                    <p>Decoding the nuance of the Asian luxury market.</p>
+                </div>
+            </div>
+
+            <div class="image">
+                <img src="https://www.instamojo.com/blog/wp-content/uploads/2023/11/Chai-Point-1024x475.png"
+                    alt="Beverage Branding">
+                <div class="hover-info">
+                    <h3>Daily Rituals</h3>
+                    <p>Elevating the tea break into a moment of mindfulness.</p>
+                </div>
+            </div>
+
+            <div class="image">
+                <img src="https://i.pinimg.com/originals/d8/23/fb/d823fbc4954d0474aad6d93c751ea265.png"
+                    alt="Art Direction">
+                <div class="hover-info">
+                    <h3>Visual Discovery</h3>
+                    <p>Celebrating the serendipity of finding inspiration.</p>
+                </div>
+            </div>
+
+            <div class="image">
+                <img src="https://licenceindia.s3.ap-south-1.amazonaws.com/s3fs-public/inline-images/Untitled%20design%20-%202025-12-29T182932.750.jpg"
+                    alt="Brand Licensing">
+                <div class="hover-info">
+                    <h3>Brand Expansion</h3>
+                    <p>Extending brand equity into new and unexpected categories.</p>
+                </div>
+            </div>
+
+            <div class="image">
+                <img src="https://gullylabs.com/cdn/shop/files/final_raga_posters-12_1_1_1_1.png?v=1761281256"
+                    alt="Streetwear">
+                <div class="hover-info">
+                    <h3>Street Culture</h3>
+                    <p>Capturing the raw energy of the underground scene.</p>
+                </div>
+            </div>
+
+            <div class="image">
+                <img src="https://gullylabs.com/cdn/shop/files/DSC8294_1.jpg?v=1755601044" alt="Street Fashion">
+                <div class="hover-info">
+                    <h3>Urban Fit</h3>
+                    <p>Where functionality meets high-concept street fashion.</p>
+                </div>
+            </div>
+
+            <div class="image">
+                <img src="https://i.ytimg.com/vi/87qMf-eQYMo/maxresdefault.jpg" alt="Video Production">
+                <div class="hover-info">
+                    <h3>Cinematic Story</h3>
+                    <p>A film-first approach that prioritizes narrative depth.</p>
+                </div>
+            </div>
+
+            <div class="image">
+                <img src="https://i.ytimg.com/vi/3L19mqT7xCE/maxresdefault.jpg" alt="Tech Campaign">
+                <div class="hover-info">
+                    <h3>Future Tech</h3>
+                    <p>Visualizing the invisible: bringing software capabilities to life.</p>
+                </div>
+            </div>
+
+            <div class="image">
+                <img src="https://brewsnspirits.in/images/articles/details/Cover-Whiskey3-A.jpg" alt="Spirits">
+                <div class="hover-info">
+                    <h3>Craft Spirits</h3>
+                    <p>Celebrating the artisanal process behind the world's finest whiskies.</p>
+                </div>
+            </div>
+
+            <div class="image">
+                <img src="https://www.hotelierindia.com/cloud/2025/02/13/The-Glenwalk-Nip-Launch-1.jpg"
+                    alt="Glenwalk Launch">
+                <div class="hover-info">
+                    <h3>Premium Launch</h3>
+                    <p>Introducing a new standard of scotch to a discerning audience.</p>
+                </div>
+            </div>
+
+            <div class="image">
+                <img src="https://restaurantindia.s3.ap-south-1.amazonaws.com/s3fs-public/inline-images/amrut%20whisky.jpg"
+                    alt="Amrut Whisky">
+                <div class="hover-info">
+                    <h3>Global Malt</h3>
+                    <p>Taking India's first single malt to the global stage.</p>
+                </div>
+            </div>
+
+            <div class="image">
+                <img src="https://pimwp.s3-accelerate.amazonaws.com/2021/12/beardo-1.jpg" alt="Beardo">
+                <div class="hover-info">
+                    <h3>Bold Grooming</h3>
+                    <p>Redefining masculinity with a brand voice that cuts through the noise.</p>
+                </div>
+            </div>
+
+            <div class="image">
+                <img src="https://images-static.nykaa.com/media/catalog/product/6/9/69d6c9a797776127306_2.jpg?tr=w-500"
+                    alt="Nykaa Beauty">
+                <div class="hover-info">
+                    <h3>Beauty Retail</h3>
+                    <p>The omnichannel strategy behind India's beauty giant.</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/1200x/29/ff/6a/29ff6a85f05b8100d3d076d14116608c.jpg" alt="Perfume">
+                <div class="hover-info">
+                    <h3>Self Esteem</h3>
+                    <p>The essence of elegance with this striking blueperfume bottle</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/736x/56/fa/72/56fa7280ee1e4da4b9c8f6d2784f1d5d.jpg" alt="Windup Watch">
+                <div class="hover-info">
+                    <h3>Windup Watch</h3>
+                    <p>A Sneak Preview of the San Francisco Windup Watch Fair </p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/1200x/5d/72/64/5d72641f76093b0b4213db102dc53419.jpg" alt="Airlines">
+                <div class="hover-info">
+                    <h3>Luxuary Airlines</h3>
+                    <p>Want to fly business class to Europe without breaking the bank? </p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/736x/f2/fa/72/f2fa7288ac5d07c04f52744b6056467b.jpg"
+                    alt="Coffee benefits">
+                <div class="hover-info">
+                    <h3>Coffee Benefits</h3>
+                    <p> Indulge in the perfect morning ritual with a creamy cup of coffee!</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/736x/2a/fc/2c/2afc2c530106e57528231d42e320fa63.jpg" alt="Indian Outfit">
+                <div class="hover-info">
+                    <h3>Indian Outfit</h3>
+                    <p> Indian Tresures, worn with pride.</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/736x/fa/b1/c2/fab1c22ada965c48a54896f3e270bff4.jpg" alt="Ind">
+                <div class="hover-info">
+                    <h3>Elegance Unfold</h3>
+                    <p> Stepping into a world where elegance is the only language</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/736x/a0/85/c7/a085c7b0491147625e2e722834d2484c.jpg" alt="Rolex">
+                <div class="hover-info">
+                    <h3>Legacy of Elegence</h3>
+                    <p> Stepping into a world where elegance is the only language</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/1200x/c1/4c/fc/c14cfcda18c9732a76bb0fbfbad0d0fa.jpg" alt="Beauty Brand">
+                <div class="hover-info">
+                    <h3>Classy Luxury - Sensa Studio</h3>
+                    <p> A luxurious serif style ideal for upscale and sophisticated projects.</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/1200x/00/1e/dd/001eddfc4ae1cf9b78cd4bb242a8d3b2.jpg" alt="Indian Saree">
+                <div class="hover-info">
+                    <h3> Women Clothing</h3>
+                    <p> Explore stylish ethnic wear like kurtas, suits, sarees, lehengas, and trendy western wear at the
+                        best prices.</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/1200x/54/d9/49/54d949652d4e67b1601d00ab904d4ca1.jpg"
+                    alt="Indian lehenga ">
+                <div class="hover-info">
+                    <h3> Nooren lehenga </h3>
+                    <p> Nooren is more than just a lehenga — it's a vision of royalty brought to life.</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/736x/0e/c9/db/0ec9db7f823f5adaf63b620889b87c36.jpg" alt="Mood board ">
+                <div class="hover-info">
+                    <h3> Tradition in life</h3>
+                    <p> The rich and luxuarise tradition of India</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/736x/b9/9c/6f/b99c6f52fd3c7d522eb72ea967e58e88.jpg" alt="Jewelry Brand ">
+                <div class="hover-info">
+                    <h3>Zova Jewelry Brand</h3>
+                    <p> Crafted with precision and passion, Zova creates timeless jewelry pieces that blend modern
+                        design with classic charm.</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/1200x/83/53/32/835332000a0d5112a385474fe958b5d0.jpg" alt="Peepal pati">
+                <div class="hover-info">
+                    <h3>The peepal pati</h3>
+                    <p> Crafted with fine detailing and artistic perfection, it represents harmony, beauty, and
+                        spiritual elegance.</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/1200x/e6/93/0f/e6930fe8f149b7ed17960649fae67e33.jpg" alt="Arshiyaa">
+                <div class="hover-info">
+                    <h3>At House of Arshiyaa</h3>
+                    <p> Heritage does not weigh heavy it breathes, it moves.</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/736x/41/1e/19/411e198ab3a526c23120779addbfee39.jpg" alt="Biriyani retro">
+                <div class="hover-info">
+                    <h3>Biriyani retro </h3>
+                    <p> Celebrate the timeless taste of India with AI-generated art of iconic dishes!</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/1200x/7e/e5/8d/7ee58d698667d2041bacd3174155dda7.jpg"
+                    alt="Punjab Heritage">
+                <div class="hover-info">
+                    <h3>Punjab Heritage</h3>
+                    <p>We take pride in crafting our own graphics — each piece is a reflection of our creativity and
+                        storytelling. </p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/1200x/1b/40/fb/1b40fb68ef1c5eff7a5d91d6c4df0fb8.jpg" alt="Patan Patola ">
+                <div class="hover-info">
+                    <h3>Patan Patola</h3>
+                    <p> Warm up to handwoven sunshine with this hand-picked authentic Yellow Patan Patola Saree.</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/1200x/14/80/56/148056bf47eb32f640846c7e4249ae51.jpg"
+                    alt="Kantha sarees ">
+                <div class="hover-info">
+                    <h3> Kantha sarees </h3>
+                    <p>Welcome monsoon blues with a little something new! Featuring a gorgeous Kantha sarees</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/736x/76/7c/1d/767c1ddace0447f7794f08ff464653d8.jpg" alt="Floral Crush ">
+                <div class="hover-info">
+                    <h3>Patiala Noor</h3>
+                    <p> Warm up to handwoven sunshine with this hand-picked authentic Yellow Patan Patola</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/736x/fd/6b/ea/fd6bea054f0713687fbde2e0aedd0ded.jpg" alt="Qurbat">
+                <div class="hover-info">
+                    <h3>Qurbat </h3>
+                    <p> Qurbat represents closeness of hearts and the beauty of deep connections.</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/736x/e9/c4/7b/e9c47b4a088d60cad3bbf823d4257cdc.jpg" alt="Karm beer">
+                <div class="hover-info">
+                    <h3>Karm beer</h3>
+                    <p>Happiness is not about having more, it’s about wanting less</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/1200x/d7/30/d7/d730d7584d3bb592631e1ae85ca2b959.jpg"
+                    alt="Patibani Legacy">
+                <div class="hover-info">
+                    <h3> Paithani Legacy</h3>
+                    <p>A journey through time and tradition. From the royal courts of the Maratha Empire to the
+                        modern-day fashion runways.</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/1200x/71/94/06/7194062515dc3ae488c729109a79cf44.jpg" alt="Modern men ">
+                <div class="hover-info">
+                    <h3>Modern Watch</h3>
+                    <p>Gifts for men who want a quality fashion piece. </p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/1200x/9f/2b/5e/9f2b5eafd34b15563fd3cab7ede4fa0a.jpg"
+                    alt=" Gucci Fashion ">
+                <div class="hover-info">
+                    <h3> Gucci Fashion </h3>
+                    <p> Gucci Fashion represents timeless luxury blended with bold creativity.</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/1200x/a3/36/65/a33665fbc6a3ae76a90884998d5f3641.jpg" alt=" Adidas Shoes">
+                <div class="hover-info">
+                    <h3> Adidas Shoes</h3>
+                    <p>Known for their iconic three stripes, they offer comfort, flexibility, and a bold sporty look for
+                        both casual and athletic wear. </p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/1200x/d6/e3/e5/d6e3e5b684955d789a046cccf8249bdb.jpg" alt="Adore">
+                <div class="hover-info">
+                    <h3>Adore </h3>
+                    <p>The image features a fashion-forward editorial look in a sleek black-and-white style.</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/1200x/ac/33/b9/ac33b96cf2b4af5a35e71223bd450f0b.jpg" alt="--off-white">
+                <div class="hover-info">
+                    <h3>Off-white</h3>
+                    <p>Inspires clarity, calmness, and confidence through a timeless message of minimal living and
+                        mindful style</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/736x/4c/4e/d2/4c4ed25fcbc9b2b39f1c5a6027070d5d.jpg" alt="Vogue">
+                <div class="hover-info">
+                    <h3>Vogue</h3>
+                    <p>With its iconic photography and powerful storytelling, it inspires millions to express
+                        individuality through style and confidence.</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/736x/28/14/6a/28146a42e053abad351597702ff03efa.jpg" alt="Prada">
+                <div class="hover-info">
+                    <h3>Parada Luxury</h3>
+                    <p>Each product is carefully designed using high-quality materials to offer elegance, comfort, and
+                        lasting beauty.</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/1200x/09/15/08/0915083bd704848e7c8527ba97fded59.jpg" alt="Cult Beauty">
+                <div class="hover-info">
+                    <h3>Cult Beauty</h3>
+                    <p>Explore trending beauty brands from the UK’s cult favourite Cosmetic Shop.
+                    </p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/1200x/ec/14/59/ec1459d90b2d10d904cdd09981cac08c.jpg" alt="Classic style">
+                <div class="hover-info">
+                    <h3>Converse – Classic Style</h3>
+                    <p> The brand represents creativity, self-expression, and timeless fashion, inspiring people to move
+                        confidently and live authentically.</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/1200x/bb/55/c9/bb55c909d0c00994c51a387e365e6445.jpg" alt="Crocs">
+                <div class="hover-info">
+                    <h3>Crocs</h3>
+                    <p>Designed for all ages, the brand blends casual fashion with durability and playful creativity, making every step easy and stylish.</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/736x/d7/81/c4/d781c4a98bd0b3bb7bd20b54526c29b8.jpg" alt="AirPods Max">
+                <div class="hover-info">
+                    <h3>AirPods Max</h3>
+                    <p>With high-fidelity audio, adaptive EQ, and a refined design</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/736x/ee/48/46/ee48468c767691d795c20480658e9b93.jpg" alt="Perfume bottle">
+                <div class="hover-info">
+                    <h3>Tom Ford</h3>
+                    <p>Wrapped in rich, woody notes and showcased in an elegant dark bottle</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://i.pinimg.com/736x/f4/a2/8d/f4a28d76a2327c9fb055ef43e3442649.jpg" alt="skin care">
+                <div class="hover-info">
+                    <h3>Skin Care</h3>
+                    <p>Iconic fragrance is perfect for those who appreciate sophistication and timeless style</p>
+                </div>
+            </div>
+
+
+
+        </section>
+
+
+
+    </main>
+    <footer>
+        <section class="footer-container">
+            <span class="footer-details">
+                <nav class="footer-nav">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Cookie</a>
+
+                </nav>
+                <nav class="footer-nav">
+                    <a href="#">Subscribe</a>
+                    <a href="#">Connect</a>
+                    <a href="#">Location</a>
+                    <a href="#">Simageap</a>
+                </nav>
+        </section>
+    </footer>
+
+
+</body>
+
+</html>

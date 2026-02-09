@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+.contact-container {
+    max-width: 900px;
+    margin: 80px auto;
+    padding: 0 20px;
+    color: #1a1a1a;
+}
+
+.contact-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.contact-header p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 50px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.form-row {
+    display: flex;
+    gap: 40px;
+}
+
+.input-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #999;
+}
+
+.contact-form input, 
+.contact-form select, 
+.contact-form textarea {
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 12px 0;
+    font-size: 1rem;
+    outline: none;
+}
+
+.contact-form input:focus, 
+.contact-form select:focus, 
+.contact-form textarea:focus {
+    border-bottom: 1px solid #000; 
+}
+
+.inquiry-btn {
+    align-self: flex-start;
+    padding: 15px 45px;
+    background-color: #000; 
+    color: #fff;
+    border: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+a
+
+.inquiry-btn:hover {
+    background-color: #333;
+    transform: translateY(-2px);
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+
+    </style>
+</head>
+<body>
+    <section class="contact-container">
+    <div class="contact-header">
+        <h1>Contact Us</h1>
+        <p>Reach out for new business, media inquiries, and other requests.</p>
+    </div>
+
+    <form action="#" class="contact-form">
+        <div class="form-row">
+            <div class="input-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your name" required>
+            </div>
+            <div class="input-group">
+                <label for="company">Company Name</label>
+                <input type="text" id="company" name="company" placeholder="Brand or Agency">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="input-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="xyz@gmail.com" required>
+            </div>
+            <div class="input-group">
+                <label for="interest">Interest</label>
+                <select id="interest" name="interest" required>
+                    <option value="" disabled selected>I'm interested in...</option>
+                    <option value="business">Business</option>
+                    <option value="brand">Brand</option>
+                    <option value="startup">Start up</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message"  placeholder="Tell us about your Brand..."></textarea>
+        </div>
+
+        <button type="submit" class="inquiry-btn"><a href="contact.html"> Inquiry</a></button>
+    </form>
+</section>
+   
+    
+</body>
+</html>
